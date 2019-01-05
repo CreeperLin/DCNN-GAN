@@ -68,14 +68,15 @@ The example reconstructed images are listed below:
 
 ## Citation
 
-    @article{
-        author = "Yunfeng Lin, Jiangbei Li, Hanjing Wang",
-        title = "DCNN-GAN: Reconstructing Realistic Image from fMRI",
-        year = "2018"
+    @article{Lin2018DCNN-GAN
+        author = {Yunfeng, Lin and Jiangbei, Li and Hanjing, Wang",
+        title = {DCNN-GAN: Reconstructing Realistic Image from   fMRI},
+        year = {2018},
+        howpublished={\url{https://github.com/CreeperLin/DCNN-GAN}}
     }
 
 ## Acknowledgements
 
 The GAN model is based on the pytorch implementation of pix2pix.
 
-The fMRI data is obtained using the datasets from Generic Object Decoding 
+The fMRI data is obtained using the datasets from Generic Object Decoding.
