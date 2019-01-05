@@ -14,53 +14,68 @@ Code repository for MVA 2019 paper "DCNN-GAN: Reconstructing Realistic Image fro
 
 ### Installation
 
-- clone this repo
+- Clone this repo
 
-    git clone https://github.com/CreeperLin/DCNN-GAN.git
+```bash
+git clone https://github.com/CreeperLin/DCNN-GAN.git
+cd DCNN-GAN
+```
 
-- install pytorch (using Anaconda is recommended)
+- Install pytorch (using Anaconda is recommended)
 
 ### Image encoding
 
 - Download ILSVRC2012 training set
 
-    ./datasets/download_image.sh
+```bash
+./datasets/download_image.sh
+```
 
 - Compute the image features
 
-    ./encoder/encode.py --datapath ./datasets/image --output-dir ./datasets/feat
+```bash
+python ./encoder/encode.py --dataset ./datasets/image --output ./datasets/feat
+```
 
 ### fMRI decoder train/test
 
 - Download fMRI on Imagenet datasets
 
-    ./datasets/download_fmri.sh
+```bash
+./datasets/download_fmri.sh
+```
 
-- Train fMRI decoder
+- Train fMRI decoder and decode
 
-    ./decode/train.py --datapath ./datasets/fmri
-
-- Test fMRI decoder (output features)
-
-    ./decode/train.py --datapath ./datasets/fmri --output-dir ./datasets/dec_feat
+```bash
+python ./decode/decode.py --dataset ./datasets/fmri --output ./datasets/dec_feat
+```
 
 ### DCNN-GAN train/test
 
 - Train DCNN-GAN
 
-    python ./dcnn-gan/train.py --datapath ./datasets/feat --name dcnngan --model pix2pix --direction BtoA
+```bash
+python ./dcnn-gan/train.py --dataset ./datasets/feat --name dcnngan --model pix2pix --direction BtoA
+```
 
 - Test DCNN-GAN
 
-    python ./dcnn-gan/test.py --datapath ./datasets/feat
+```bash
+python ./dcnn-gan/test.py --dataset ./datasets/feat
+```
 
 - Image reconstruction using decoded features
 
-    python ./dcnn-gan/test.py --datapath ./datasets/dec_feat
+```bash
+python ./dcnn-gan/test.py --dataset ./datasets/dec_feat
+```
 
 ### Run the full pipeline (training & reconstruction)
 
-    ./run_all.sh
+```bash
+./run_all.sh
+```
 
 ## Results
 

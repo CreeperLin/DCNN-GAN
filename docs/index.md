@@ -1,19 +1,19 @@
 # DCNN-GAN: Reconstructing Realistic Image from fMRI
 
 <center>
-<table align="center" width="600px">
+<table align="center" style="display:table;width:600px">
 	<tbody><tr>
-	    <td align="center" width="100px">
+	    <td align="center" width="100px" style="border:none">
 	  		<center>
 	  			<span style="font-size:18px"><a href="https://github.com/CreeperLin">Yunfeng Lin</a></span>
 		  	</center>
 		</td>
-	  	<td align="center" width="100px">
+	  	<td align="center" width="100px" style="border:none">
 	  		<center>
 	  			<span style="font-size:18px"><a href="https://github.com/Aimalex">Jiangbei Li</a></span>
 		    </center>
 		</td>
-	  	<td align="center" width="100px">
+	  	<td align="center" width="100px" style="border:none">
 	  		<center>
 	  			<span style="font-size:18px"><a href="https://github.com/VegeWong">Hanjing Wang</a></span>
 		  	</center>
@@ -24,14 +24,14 @@
 <br>
 <span style="font-size:18px">For MVA 2019</span>
 <br>
-<table align="center" width="300px">
+<table align="center" style="display:table;width:300px">
 	<tbody><tr>
-	  	<td align="center" width="50px">
+	  	<td align="center" width="50px" style="border:none">
 	  		<center>
 	  		<span style="font-size:24px"><a href="">[Paper]</a>
 		  	</span></center>
 		</td>
-	  	<td align="center" width="50px">
+	  	<td align="center" width="50px" style="border:none">
 	  		<center>
 	  		<span style="font-size:24px"><a href="https://github.com/CreeperLin/DCNN-GAN">[GitHub]</a></span>
 		  	</center>
@@ -39,6 +39,8 @@
 </tr></tbody></table>
 <br>
 </center>
+
+Results here?
 
 ## Abstract
 
@@ -53,6 +55,8 @@ Portrait here
 ## Video Demo
 
 Video here
+
+More results here
 
 ## Code
 
