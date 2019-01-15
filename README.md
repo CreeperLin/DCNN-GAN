@@ -19,6 +19,7 @@ Code repository for MVA 2019 paper "DCNN-GAN: Reconstructing Realistic Image fro
 ```bash
 git clone https://github.com/CreeperLin/DCNN-GAN.git
 cd DCNN-GAN
+git submodule update --init
 ```
 
 - Install pytorch (using Anaconda is recommended)
@@ -45,10 +46,16 @@ python ./encoder/encode.py --dataset ./datasets/image --output ./datasets/feat
 ./datasets/download_fmri.sh
 ```
 
+- Generate image features for training
+
+```bash
+python ./decode/train_dataloader.py --img_data ./datasets/image_fmri --output ./tmp/feat_data
+```
+
 - Train fMRI decoder and decode
 
 ```bash
-python ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./datasets/feat_data --output ./tmp/decoded_feat
+python ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./tmp/feat_data --output ./tmp/decoded_feat
 ```
 
 ### DCNN-GAN train/test

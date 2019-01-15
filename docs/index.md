@@ -38,9 +38,9 @@
 		</td>
 </tr></tbody></table>
 <br>
-</center>
 
-Results here?
+<img src="./results.png" align="center" style="width:75%">
+</center>
 
 ## Abstract
 
@@ -50,13 +50,13 @@ Visualizing the perceptual content by analyzing human functional magnetic resona
 
 Yunfeng Lin, Jiangbei Li, Hanjing Wang
 
-Portrait here
-
 ## Video Demo
 
-Video here
+<iframe width="800" height="450" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-More results here
+<center>
+<img src="./more_results.png" align="center" style="width:100%">
+</center>
 
 ## Code
 
