@@ -28,7 +28,7 @@
 	<tbody><tr>
 	  	<td align="center" width="50px" style="border:none">
 	  		<center>
-	  		<span style="font-size:24px"><a href="">[Paper]</a>
+	  		<span style="font-size:24px"><a href="https://github.com/CreeperLin/DCNN-GAN/raw/master/docs/paper.pdf">[Paper]</a>
 		  	</span></center>
 		</td>
 	  	<td align="center" width="50px" style="border:none">

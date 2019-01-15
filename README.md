@@ -80,7 +80,7 @@ The example reconstructed images are listed below:
 
     @article{Lin2018DCNN-GAN
         author = {Yunfeng, Lin and Jiangbei, Li and Hanjing, Wang",
-        title = {DCNN-GAN: Reconstructing Realistic Image from   fMRI},
+        title = {DCNN-GAN: Reconstructing Realistic Image from fMRI},
         year = {2018},
         howpublished={\url{https://github.com/CreeperLin/DCNN-GAN}}
     }
