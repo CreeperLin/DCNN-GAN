@@ -2,6 +2,7 @@ import os
 import cv2
 import torch
 import pickle
+import subprocess
 import numpy as np
 import torch.nn as nn
 import torch.utils.data as Data
@@ -111,5 +112,11 @@ if __name__=="__main__":
     print('--------pix2pix training data saved---------')
     
     
+    print('--------training pix2pix module----------')
     
-    
+    classes = open("classlist.txt") 
+    for line in classes.readlines():
+        command = "python ./reconstruction/pix2pix/train.py --dataroot ./reconstruction/data/train_pix2pix/" + line + " --name " + line + " --model pix2pix --netG unet_128 --direction BtoA --lambda_L1 100 --dataset_mode aligned --norm batch --pool_size 0 --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --batch_size " + str(args.pix2pix_batch) + " --niter " + str(args.pix2pix_niter) + " --niter_decay " + str(args.pix2pix_niter_decay) + " --lr " + str(args.pix2pix_lr)
+        subprocess.call(command, shell = True)
+        
+    print('--------training complete----------')

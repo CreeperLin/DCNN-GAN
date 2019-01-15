@@ -59,23 +59,22 @@ python ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./tmp/fea
 ```
 
 ### DCNN-GAN train/test
+- Data Preparation
+
+```bash
+python ./reconstruction/dataloader.py --dataset ./datasets/Imagenet2012/img_par
+```
 
 - Train DCNN-GAN
 
 ```bash
-python ./dcnn-gan/train.py --dataset ./datasets/feat --name dcnngan --model pix2pix --direction BtoA
+python ./reconstruction/train.py --pix2pix_dataset ./datasets/pix2pix_data/train_img
 ```
 
 - Test DCNN-GAN
 
 ```bash
-python ./dcnn-gan/test.py --dataset ./datasets/feat
-```
-
-- Image reconstruction using decoded features
-
-```bash
-python ./dcnn-gan/test.py --dataset ./tmp/decoded_feat
+python ./reconstruction/test.py --test_feat ./decode/result/decode_Subject1_VC_lr_pred.pkl --test_id ./decode/result/decode_Subject1_VC_lr_id.pkl
 ```
 
 ### Run the full pipeline (training & reconstruction)
