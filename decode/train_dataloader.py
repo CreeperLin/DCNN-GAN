@@ -9,7 +9,7 @@ import torchvision.transforms as transforms
 
 from torch.autograd import Variable
 
-net = models.vgg19(pretrained = True).cuda()
+net = models.vgg19_bn(pretrained = True).cuda()
 net.classifier = nn.Sequential(*list(net.classifier.children())[:-6])
 
 print('---------loading decode training data---------')

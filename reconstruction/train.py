@@ -16,10 +16,10 @@ args = opt
 if __name__=="__main__":
     
     print('--------loading training data---------')
-    file1 = open('train_x_vgg19_bn_fc.pickle',"rb")
+    file1 = open('./data/train_x_vgg19_bn_fc.pickle',"rb")
     train_x = pickle.load(file1)
     file1.close()
-    file2 = open('train_y_vgg19_bn_fc.pickle',"rb")
+    file2 = open('./data/train_y_vgg19_bn_fc.pickle',"rb")
     train_y = pickle.load(file2)
     file2.close()
     print('--------loading training data complete---------')
@@ -73,11 +73,11 @@ if __name__=="__main__":
     torch.save(transNet.state_dict(), './model/deconvNN_par.pkl')
     print('--------deconv network training complete----------')
     
-    net = models.vgg19(pretrained = True).cuda()
+    net = models.vgg19_bn(pretrained = True).cuda()
     net.classifier = nn.Sequential(*list(net.classifier.children())[:-6])
 
     print('--------generate pix2pix training data---------')
-    img_data = torchvision.datasets.ImageFolder('?/pix2pix_data/train_img', transform=transforms.Compose([
+    img_data = torchvision.datasets.ImageFolder(args.pix2pix_dataset, transform=transforms.Compose([
                                                 transforms.Scale(256),
                                                 transforms.CenterCrop(224),
                                                 transforms.ToTensor()]))
