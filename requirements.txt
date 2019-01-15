@@ -1,7 +1,6 @@
 numpy
-pickle
-PIL
-opencv
+pillow
+opencv-python
 torch
 torchvision
 dominate

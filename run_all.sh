@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# install prerequisites
+pip3 install -r requirements.txt
+
 # download fMRI dataset
 ./datasets/download_fmri.sh
 

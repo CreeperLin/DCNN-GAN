@@ -82,6 +82,7 @@ def main():
         print('Subject:    %s' % sbj)
         print('ROI:        %s' % roi)
         
+        # load fMRI data
         with open(os.path.join(fmri_dir,'fmri_'+sbj+'_'+roi+'.pkl'),'rb') as f:
             dat=pickle.load(f)
 
@@ -89,10 +90,8 @@ def main():
         labels = dat[:,1]
         x = dat[:,2:]
 
-        decode_id = 'decode_' + sbj + '_' + roi
-
-        y = data_feature
-        y_sorted, i_avail, keys = sort_img_feat(y, labels)
+        # get available image features for training
+        y_sorted, i_avail, keys = sort_img_feat(data_feature, labels)
 
         i_train = (datatype == 1).flatten()    # Index for training
         i_test = (datatype == 2).flatten()  # Index for perception test
@@ -100,13 +99,18 @@ def main():
         i_test_f = i_test & i_avail
         i_train_f = i_train & i_avail
 
+        # divide training & test data
         x_train = x[i_train_f, :]
         x_test = x[i_test_f, :]
         y_train = y_sorted[i_train_f, :]
         y_test = y_sorted[i_test_f, :]
         lbl = keys[i_test_f]
         
+        # train decoder and decode
         pred_y = run_decode(x_train, y_train, x_test, y_test)
+
+        # save results
+        decode_id = 'decode_' + sbj + '_' + roi
 
         savepath = os.path.join(results_dir, decode_id+'_pred.pkl')
         with open(savepath, 'wb') as f:

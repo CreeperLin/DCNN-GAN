@@ -22,20 +22,9 @@ cd DCNN-GAN
 git submodule update --init
 ```
 
-- Install pytorch (using Anaconda is recommended)
-
-### Image encoding
-
-- Download ILSVRC2012 training set
-
+- Install requirements (using Anaconda is also recommended)
 ```bash
-./datasets/download_image.sh
-```
-
-- Compute the image features
-
-```bash
-python ./encoder/encode.py --dataset ./datasets/image --output ./datasets/feat
+pip3 install -r requirements.txt
 ```
 
 ### fMRI decoder train/test

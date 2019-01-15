@@ -70,6 +70,6 @@ Citation in bibtex availale [here](https://github.com/CreeperLin/DCNN-GAN/raw/ma
 
 ## Acknowledgements
 
-The GAN model is based on the pytorch implementation of pix2pix.
+The GAN model is based on the pytorch implementation of [pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix).
 
-The fMRI data is obtained using the datasets from Generic Object Decoding.
+The fMRI data is obtained using the datasets from [Generic Object Decoding](https://openneuro.org/datasets/ds001246/versions/1.0.1).
