@@ -1,3 +1,4 @@
+import os
 import cv2
 import torch
 import pickle
@@ -22,6 +23,7 @@ if __name__=="__main__":
     train_y = pickle.load(file2)
     file2.close()
     print('--------loading training data complete---------')
+    
     print('--------training deconv network----------')
     for i in range(len(train_x)):
         train_x[i] = torch.from_numpy(train_x[i])
@@ -68,8 +70,46 @@ if __name__=="__main__":
             if(step % 100 == 0):
                 print("train epoch: ", t, "loss", loss.cpu().data.numpy())
 
-    torch.save(transNet, 'model1.pkl')
+    torch.save(transNet.state_dict(), './model/deconvNN_par.pkl')
     print('--------deconv network training complete----------')
+    
+    net = models.vgg19(pretrained = True).cuda()
+    net.classifier = nn.Sequential(*list(net.classifier.children())[:-6])
+
+    print('--------generate pix2pix training data---------')
+    img_data = torchvision.datasets.ImageFolder('?/pix2pix_data/train_img', transform=transforms.Compose([
+                                                transforms.Scale(256),
+                                                transforms.CenterCrop(224),
+                                                transforms.ToTensor()]))
+    testdata = torch.utils.data.DataLoader(img_data)
+    pix2pixdata_y = [[]]*len(img_data.classes)
+    pix2pixdata_x = [[]]*len(img_data.classes)
+    transNet_x = [[]]*len(img_data.classes)
+    
+    for step, (x, y) in enumerate(testdata):
+        b_x = x.cuda()
+        data = net(b_x)
+        pix2pixdata_y[img_data[step][1]].append(data.cpu().data[0].numpy())
+        transNet_x[img_data[step][1]].append((transforms.ToTensor()(transforms.ToPILImage()(x.data[0]).convert('RGB').resize((112, 112), Image.ANTIALIAS))).numpy())
+    
+    
+    for i in range (len(transNet_x)):
+        
+        file_path = './data/pix2pixdata/' + img_data.classes[i] + '/train/'
+        if not os.path.exists(file_path):
+            os.makedirs(file_path)
+            
+        for j in range (len(transNet_x[i])):
+            x = torch.from_numpy(np.array([transNet_x[i][j]])).cuda()
+            prediction = transNet(x).cpu().data
+            xxx = torch.from_numpy(pix2pixdata_y[i][j])
+            yyy = prediction[0]
+            z = torch.cat((xxx, yyy), 2)
+            img = transforms.ToPILImage()(z),convert('RGB')
+            img.save(file_path + str(j) + '.jpg')
+            
+    print('--------pix2pix training data saved---------')
+    
     
     
     
