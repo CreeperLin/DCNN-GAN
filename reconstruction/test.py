@@ -38,10 +38,10 @@ if __name__=="__main__":
     net = transnet().cuda()
     net.load_state_dict('./model/deconvNN_par.pkl')
 
-    file1 = open(args.test_feat,"rb")
+    file1 = open(args.decoded_feat + "/decode_Subject1_VC_lr_pred.pkl","rb")
     test_x = pickle.load(file1)
     file1.close()
-    file2 = open(args.test_id,"rb")
+    file2 = open(args.decoded_feat + "/decode_Subject1_VC_lr_id.pkl","rb")
     test_id = pickle.load(file2)
 #     file2.close()
 #     file3 = open("../Disk1/Imagenet2012/cropped_image_test/images_vgg19_bn_fc.pickle", "rb")
