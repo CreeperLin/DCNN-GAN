@@ -1,0 +1,9 @@
+numpy
+pickle
+PIL
+opencv
+torch
+torchvision
+dominate
+visdom
+matplotlib
