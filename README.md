@@ -7,8 +7,6 @@ Code repository for MVA 2019 paper "DCNN-GAN: Reconstructing Realistic Image fro
 - Linux / macOS
 - NVIDIA GPU with CUDA CuDNN
 - Python 3
-- PyTorch
-- scikit-learn
 
 ## Getting Started
 
@@ -63,7 +61,7 @@ python ./reconstruction/train.py --pix2pix_dataset ./datasets/pix2pix_data/train
 - Test DCNN-GAN
 
 ```bash
-python ./reconstruction/test.py --test_feat ./decode/result/decode_Subject1_VC_lr_pred.pkl --test_id ./decode/result/decode_Subject1_VC_lr_id.pkl
+python ./reconstruction/test.py --decoded_feat ./tmp/decoded_feat
 ```
 
 ### Run the full pipeline (training & reconstruction)

@@ -13,7 +13,8 @@ python ./decode/train_dataloader.py --img_data ./datasets/image_fmri --output ./
 python ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./tmp/feat_data --output ./tmp/decoded_feat
 
 # train DCNN-GAN
+python ./reconstruction/dataloader.py --dataset ./datasets/Imagenet2012/img_par
+python ./reconstruction/train.py --pix2pix_dataset ./datasets/pix2pix_data/train_img
 
 # test DCNN-GAN
-
-# reconstruct the image
+python ./reconstruction/test.py --decoded_feat ./tmp/decoded_feat

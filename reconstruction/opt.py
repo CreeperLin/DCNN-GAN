@@ -26,6 +26,4 @@ parser.add_argument('--pix2pix_batch', default=1, type=int, help='pix2pix batch 
 
 "--------------test options-------------"
 
-parser.add_argument('--test_feat', default='../decode/result/decode_Subject1_VC_lr_pred.pkl', type=str, help='decoded features file')
-
-parser.add_argument('--test_id', default='../decode/result/decode_Subject1_VC_lr_id.pkl', type=str, help='path to decoded images id file')
+parser.add_argument('--decoded_feat', default='./tmp/decoded_feat', type=str, help='decoded features file')
