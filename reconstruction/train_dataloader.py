@@ -36,3 +36,5 @@ file1.close()
 file2 = open('train_y_vgg19_bn_fc.pickle', 'wb')
 pickle.dump(traindata_y, file2)
 file2.close()
+
+print('---------DCNN training data saved---------')
