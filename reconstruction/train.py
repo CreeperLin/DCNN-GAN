@@ -95,7 +95,7 @@ if __name__=="__main__":
     
     for i in range (len(transNet_x)):
         
-        file_path = './data/pix2pixdata/' + img_data.classes[i] + '/train/'
+        file_path = './data/train_pix2pix/' + img_data.classes[i] + '/train/'
         if not os.path.exists(file_path):
             os.makedirs(file_path)
             
