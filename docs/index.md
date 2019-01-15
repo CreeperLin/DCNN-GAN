@@ -52,11 +52,11 @@ Yunfeng Lin, Jiangbei Li, Hanjing Wang
 
 ## Video Demo
 
-<iframe width="800" height="450" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="800" height="450" src="https://www.youtube.com/embed/3wXBjfMs_D4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-<center>
+<!-- <center>
 <img src="./more_results.png" align="center" style="width:100%">
-</center>
+</center> -->
 
 ## Code
 
