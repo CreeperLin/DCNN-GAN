@@ -1,5 +1,6 @@
 import torch
 import pickle
+import subprocess
 import torchvision
 import numpy as np
 import torch.nn as nn
@@ -71,5 +72,10 @@ if __name__=="__main__":
 #         img = transforms.ToPILImage()(xxx).convert('RGB').resize((128, 128))
 #         img.save(file_path + test_id[i])
 
-    print("--------------generate better image---------------")
+    print("--------------better image reconstruct---------------")
+    for i in range (len(testdata_x)):
+        img_class = test_id[i][0: 9]
+        command = "python ./pix2pix/test.py --dataroot ../data/test_pix2pix/"+ img_class +" --name " + img_class + " --model test --netG unet_128 --direction BtoA --dataset_mode single --norm batch --load_size 128 --crop_size 128 --checkpoints_dir ../model/checkpoints --results_dir ../result"
+        subprocess.call(command, shell=True)
     
+    print("--------------reconstruction complete---------------")
