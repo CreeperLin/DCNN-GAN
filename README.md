@@ -48,7 +48,7 @@ python ./encoder/encode.py --dataset ./datasets/image --output ./datasets/feat
 - Train fMRI decoder and decode
 
 ```bash
-python ./decode/decode.py --dataset ./datasets/fmri --output ./datasets/dec_feat
+python ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./datasets/feat_data --output ./tmp/decoded_feat
 ```
 
 ### DCNN-GAN train/test
@@ -68,7 +68,7 @@ python ./dcnn-gan/test.py --dataset ./datasets/feat
 - Image reconstruction using decoded features
 
 ```bash
-python ./dcnn-gan/test.py --dataset ./datasets/dec_feat
+python ./dcnn-gan/test.py --dataset ./tmp/decoded_feat
 ```
 
 ### Run the full pipeline (training & reconstruction)
