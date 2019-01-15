@@ -75,7 +75,7 @@ if __name__=="__main__":
     print("--------------better image reconstruct---------------")
     for i in range (len(testdata_x)):
         img_class = test_id[i][0: 9]
-        command = "python ./pix2pix/test.py --dataroot ../data/test_pix2pix/"+ img_class +" --name " + img_class + " --model test --netG unet_128 --direction BtoA --dataset_mode single --norm batch --load_size 128 --crop_size 128 --checkpoints_dir ../model/checkpoints --results_dir ../result"
+        command = "python ./reconstruction/pix2pix/test.py --dataroot ./reconstruction/data/test_pix2pix/"+ img_class +" --name " + img_class + " --model test --netG unet_128 --direction BtoA --dataset_mode single --norm batch --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --results_dir ./reconstruction/result"
         subprocess.call(command, shell=True)
     
     print("--------------reconstruction complete---------------")
