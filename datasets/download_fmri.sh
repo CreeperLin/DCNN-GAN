@@ -14,5 +14,5 @@ if [ -f $fname ]; then
 else
     curl -o "$dir/$fname" $url
 fi
-unzip "$dir/$fname"
+unzip "$dir/$fname" -d $dir
 rm -rf "$dir/$fname"
