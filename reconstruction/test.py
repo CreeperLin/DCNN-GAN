@@ -7,12 +7,11 @@ import torch.nn as nn
 import torch.utils.data as Data
 import torchvision.transforms as transforms
 
-from opt import opt
+from opt import args
 from PIL import Image
 from torch.autograd import Variable
 from matplotlib.pyplot import imshow
 
-args = opt
 if __name__=="__main__":
     class transnet(nn.Module):
         def __init__(self):
@@ -75,7 +74,7 @@ if __name__=="__main__":
     print("--------------better image reconstruct---------------")
     for i in range (len(testdata_x)):
         img_class = test_id[i][0: 9]
-        command = "python ./reconstruction/pix2pix/test.py --dataroot ./reconstruction/data/test_pix2pix/"+ img_class +" --name " + img_class + " --model test --netG unet_128 --direction BtoA --dataset_mode single --norm batch --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --results_dir ./reconstruction/result"
+        command = "python ./reconstruction/pix2pix/test.py --dataroot ./reconstruction/data/test_pix2pix/"+ img_class +" --name " + img_class + " --model test --netG unet_128 --direction BtoA --dataset_mode single --norm batch --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --results_dir " + args.output
         subprocess.call(command, shell=True)
     
     print("--------------reconstruction complete---------------")

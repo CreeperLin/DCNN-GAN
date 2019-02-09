@@ -36,32 +36,32 @@ pip3 install -r requirements.txt
 - Generate image features for training
 
 ```bash
-python ./decode/train_dataloader.py --img_data ./datasets/image_fmri --output ./tmp/feat_data
+python3 ./decode/train_dataloader.py --img_data ./datasets/image_fmri --output ./tmp/feat_data
 ```
 
 - Train fMRI decoder and decode
 
 ```bash
-python ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./tmp/feat_data --output ./tmp/decoded_feat
+python3 ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./tmp/feat_data --output ./tmp/decoded_feat
 ```
 
 ### DCNN-GAN train/test
 - Data Preparation
 
 ```bash
-python ./reconstruction/dataloader.py --dataset ./datasets/Imagenet2012/img_par
+python3 ./reconstruction/train_dataloader.py --dataset ./datasets/  
 ```
 
 - Train DCNN-GAN
 
 ```bash
-python ./reconstruction/train.py --pix2pix_dataset ./datasets/pix2pix_data/train_img
+python3 ./reconstruction/train.py --pix2pix_dataset ./datasets/pix2pix_data/train_img
 ```
 
 - Test DCNN-GAN
 
 ```bash
-python ./reconstruction/test.py --decoded_feat ./tmp/decoded_feat
+python3 ./reconstruction/test.py --decoded_feat ./tmp/decoded_feat --output ./reconstruction/results
 ```
 
 ### Run the full pipeline (training & reconstruction)

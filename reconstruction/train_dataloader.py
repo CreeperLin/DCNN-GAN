@@ -7,10 +7,9 @@ import torch.utils.data as Data
 import torchvision.models as models
 import torchvision.transforms as transforms
 
-from opt import opt
+from opt import args
 from torch.autograd import Variable
 
-args = opt
 if __name__=="__main__":
     net = models.vgg19_bn(pretrained = True).cuda()
     net.classifier = nn.Sequential(*list(net.classifier.children())[:-6])
