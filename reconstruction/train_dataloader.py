@@ -31,11 +31,15 @@ if __name__=="__main__":
 
     for i in range(len(traindata_x)):
         traindata_y[i] = ((transforms.ToTensor()(transforms.ToPILImage()(torch.from_numpy(traindata_y[i])).convert('RGB').resize((112, 112), Image.ANTIALIAS))).numpy())
+
+    output_dir = args.output
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     
-    file1 = open('./data/train_x_vgg19_bn_fc.pickle', 'wb')
+    file1 = open(os.path.join(output_dir, 'train_x_vgg19_bn_fc.pickle'), 'wb')
     pickle.dump(traindata_x, file1)
     file1.close()
-    file2 = open('./data/train_y_vgg19_bn_fc.pickle', 'wb')
+    file2 = open(os.path.join(output_dir, 'train_y_vgg19_bn_fc.pickle'), 'wb')
     pickle.dump(traindata_y, file2)
     file2.close()
 

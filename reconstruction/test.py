@@ -37,12 +37,11 @@ if __name__=="__main__":
     net = transnet().cuda()
     net.load_state_dict('./model/deconvNN_par.pkl')
 
-    file1 = open(args.decoded_feat + "/decode_Subject1_VC_lr_pred.pkl","rb")
-    test_x = pickle.load(file1)
-    file1.close()
-    file2 = open(args.decoded_feat + "/decode_Subject1_VC_lr_id.pkl","rb")
-    test_id = pickle.load(file2)
-#     file2.close()
+    with open(os.path.join(args.decoded_feat, "/decode_Subject1_VC_lr_pred.pkl"), "rb") as f:
+        test_x = pickle.load(f)
+
+    with open(os.path.join(args.decoded_feat, "/decode_Subject1_VC_lr_id.pkl"), "rb") as f:
+        test_id = pickle.load(f)
 #     file3 = open("../Disk1/Imagenet2012/cropped_image_test/images_vgg19_bn_fc.pickle", "rb")
 #     test_y = pickle.load(file3)
 
@@ -54,9 +53,12 @@ if __name__=="__main__":
 #         testdata_y.append(train_y[train_id[i]])
     
     print("--------------generate blur image---------------")
+
+    test_img_path = './tmp/test_pix2pix/'
+
     for i in range (len(testdata_x)):
         img_class = test_id[i][0: 9]
-        file_path = './data/test_pix2pix/' + img_class + '/'
+        file_path = os.path.join(test_img_path, img_class)
         if not os.path.exists(file_path):
             os.makedirs(file_path)
             
@@ -72,9 +74,14 @@ if __name__=="__main__":
 #         img.save(file_path + test_id[i])
 
     print("--------------better image reconstruct---------------")
+
+    output_dir = args.output
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
     for i in range (len(testdata_x)):
         img_class = test_id[i][0: 9]
-        command = "python ./reconstruction/pix2pix/test.py --dataroot ./reconstruction/data/test_pix2pix/"+ img_class +" --name " + img_class + " --model test --netG unet_128 --direction BtoA --dataset_mode single --norm batch --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --results_dir " + args.output
+        command = "python ./reconstruction/pix2pix/test.py --dataroot "+ os.path.join(test_img_path, img_class) + " --name " + img_class + " --model test --netG unet_128 --direction BtoA --dataset_mode single --norm batch --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --results_dir " + output_dir
         subprocess.call(command, shell=True)
     
     print("--------------reconstruction complete---------------")

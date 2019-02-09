@@ -21,6 +21,7 @@ git submodule update --init
 ```
 
 - Install requirements (using Anaconda is also recommended)
+
 ```bash
 pip3 install -r requirements.txt
 ```
@@ -49,13 +50,13 @@ python3 ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./tmp/fe
 - Data Preparation
 
 ```bash
-python3 ./reconstruction/train_dataloader.py --dataset ./datasets/  
+python3 ./reconstruction/train_dataloader.py --dataset ./datasets/train_dcnn_img --output ./tmp/dcnn_train
 ```
 
 - Train DCNN-GAN
 
 ```bash
-python3 ./reconstruction/train.py --pix2pix_dataset ./datasets/pix2pix_data/train_img
+python3 ./reconstruction/train.py --DCNN_dataset ./tmp/dcnn_train --pix2pix_dataset ./datasets/train_gan_img
 ```
 
 - Test DCNN-GAN

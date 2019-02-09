@@ -17,12 +17,13 @@ args = opt
 if __name__=="__main__":
     
     print('--------loading training data---------')
-    file1 = open('./data/train_x_vgg19_bn_fc.pickle',"rb")
-    train_x = pickle.load(file1)
-    file1.close()
-    file2 = open('./data/train_y_vgg19_bn_fc.pickle',"rb")
-    train_y = pickle.load(file2)
-    file2.close()
+
+    with open(os.path.join(args.DCNN_dataset, 'train_x_vgg19_bn_fc.pickle'), "rb") as f:
+        pickle.load(f)
+
+    with open(os.path.join(args.DCNN_dataset, 'train_y_vgg19_bn_fc.pickle'), "rb") as f:
+        pickle.load(file2)
+        
     print('--------loading training data complete---------')
     
     print('--------training deconv network----------')
@@ -71,7 +72,7 @@ if __name__=="__main__":
             if(step % 100 == 0):
                 print("train epoch: ", t, "loss", loss.cpu().data.numpy())
 
-    torch.save(transNet.state_dict(), './model/deconvNN_par.pkl')
+    torch.save(transNet.state_dict(), './reconstruction/model/deconvNN_par.pkl')
     print('--------deconv network training complete----------')
     
     net = models.vgg19_bn(pretrained = True).cuda()
@@ -96,7 +97,9 @@ if __name__=="__main__":
     
     for i in range (len(transNet_x)):
         
-        file_path = './data/train_pix2pix/' + img_data.classes[i] + '/train/'
+        train_img_path = './tmp/train_pix2pix/'
+
+        file_path = os.path.join(train_img_path, img_data.classes[i], 'train')
         if not os.path.exists(file_path):
             os.makedirs(file_path)
             
@@ -107,7 +110,7 @@ if __name__=="__main__":
             yyy = prediction[0]
             z = torch.cat((xxx, yyy), 2)
             img = transforms.ToPILImage()(z),convert('RGB')
-            img.save(file_path + str(j) + '.jpg')
+            img.save(os.path.join(file_path, str(j) + '.jpg'))
             
     print('--------pix2pix training data saved---------')
     
@@ -116,7 +119,7 @@ if __name__=="__main__":
     
     classes = open("classlist.txt") 
     for line in classes.readlines():
-        command = "python ./reconstruction/pix2pix/train.py --dataroot ./reconstruction/data/train_pix2pix/" + line + " --name " + line + " --model pix2pix --netG unet_128 --direction BtoA --lambda_L1 100 --dataset_mode aligned --norm batch --pool_size 0 --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --batch_size " + str(args.pix2pix_batch) + " --niter " + str(args.pix2pix_niter) + " --niter_decay " + str(args.pix2pix_niter_decay) + " --lr " + str(args.pix2pix_lr)
+        command = "python ./reconstruction/pix2pix/train.py --dataroot " + os.path.join(train_img_path, line) + " --name " + line + " --model pix2pix --netG unet_128 --direction BtoA --lambda_L1 100 --dataset_mode aligned --norm batch --pool_size 0 --load_size 128 --crop_size 128 --checkpoints_dir ./reconstruction/model/checkpoints --batch_size " + str(args.pix2pix_batch) + " --niter " + str(args.pix2pix_niter) + " --niter_decay " + str(args.pix2pix_niter_decay) + " --lr " + str(args.pix2pix_lr)
         subprocess.call(command, shell = True)
         
     print('--------training complete----------')
