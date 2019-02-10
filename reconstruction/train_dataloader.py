@@ -1,3 +1,4 @@
+import os
 import torch
 import pickle
 import torchvision
@@ -9,14 +10,15 @@ import torchvision.transforms as transforms
 
 from opt import args
 from torch.autograd import Variable
+from PIL import Image
 
 if __name__=="__main__":
     net = models.vgg19_bn(pretrained = True).cuda()
     net.classifier = nn.Sequential(*list(net.classifier.children())[:-6])
 
-    print('---------loading DCNN training data---------')
+    print('-------- loading DCNN training images ---------')
     DCNN_data = torchvision.datasets.ImageFolder(args.dataset, transform=transforms.Compose([
-                                                    transforms.Scale(256),
+                                                    transforms.Resize(256),
                                                     transforms.CenterCrop(224),
                                                     transforms.ToTensor()]))
     testdata = torch.utils.data.DataLoader(DCNN_data)
@@ -36,11 +38,13 @@ if __name__=="__main__":
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
-    file1 = open(os.path.join(output_dir, 'train_x_vgg19_bn_fc.pickle'), 'wb')
-    pickle.dump(traindata_x, file1)
-    file1.close()
-    file2 = open(os.path.join(output_dir, 'train_y_vgg19_bn_fc.pickle'), 'wb')
-    pickle.dump(traindata_y, file2)
-    file2.close()
+    traindata_x = np.array(traindata_x)
+    traindata_y = np.array(traindata_y)
+    
+    with open(os.path.join(output_dir, 'train_x_vgg19_bn_fc.pickle'), 'wb') as f:
+        pickle.dump(traindata_x, f)
 
-print('---------DCNN training data saved---------')
+    with open(os.path.join(output_dir, 'train_y_vgg19_bn_fc.pickle'), 'wb') as f:
+        pickle.dump(traindata_y, f)
+
+print('-------- DCNN training data saved ---------')

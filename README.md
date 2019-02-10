@@ -47,6 +47,7 @@ python3 ./decode/decode.py --fmri_data ./datasets/fmri_data --feat_data ./tmp/fe
 ```
 
 ### DCNN-GAN train/test
+
 - Data Preparation
 
 ```bash
